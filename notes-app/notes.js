@@ -8,10 +8,10 @@ const getNotes = function () {
 
 const addNote = (title, body) => {
     var notes = loadNotes()
-    const duplicateNotes = notes.filter((note) => {
-        return note.title === title
-    })
-    if (duplicateNotes.length ===0) {
+    // const duplicateNotes = notes.filter((note) => { return note.title === title })
+    const duplicateNote = notes.find((note) => note.title === title)
+
+    if (! duplicateNote) {
         console.log('New note added')
         notes.push({
             title:title,
@@ -21,7 +21,6 @@ const addNote = (title, body) => {
     else {
         console.log('Duplicate detected, note ignored')
     }
-    console.log(notes)
     saveNotes(notes)
 }
 
@@ -49,14 +48,35 @@ const loadNotes = () => {
     try {
         const dataBuffer = fs.readFileSync(notesDatabaseName)
         const dataString = dataBuffer.toString()
-        return JSON.parse(dataString)            
+        return JSON.parse(dataString)
     } catch (e) {
         return []
     }
 }
 
+const listNotes = () => {
+  let notesArray = loadNotes()
+  notesArray.forEach((note) =>{
+    console.log(`Note Title: ${note.title}`)
+    console.log(`Body: \n${note.body}`)
+  })
+}
+
+const readNote = (title) => {
+  let notesArray = loadNotes()
+  let noteFound = notesArray.find((note) => note.title === title)
+  if (noteFound) {
+    console.log(chalk.inverse( `Note Title: ${noteFound.title}` ))
+    console.log(`Note Body: ${noteFound.body}`)
+  } else {
+    console.log('No notes found by that name')
+  }
+}
+
 module.exports = {
-    getNotes:getNotes,
-    addNote:addNote,
-    removeNote:removeNote
+  getNotes:getNotes,
+  addNote:addNote,
+  removeNote:removeNote,
+  listNotes:listNotes,
+  readNote: readNote
 }

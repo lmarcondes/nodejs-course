@@ -55,12 +55,30 @@ yargs.command({
     }
 })
 
-// list commad
+// listNote  command
 yargs.command({
     command:'list',
-    describe:'list all notes created',
-    handler: () => {
-        console.log('notes created...')
+    describe:'List all saved notes',
+    handler: ()=>{
+        console.log('Listing all notes')
+        notes.listNotes()
+    }
+})
+
+// Read Note command
+yargs.command({
+    command:'read',
+    describe:'read a note from the database',
+    builder:{
+        title:{
+            describe:'title of the note to be removed',
+            demandOption:true,
+            type:'string'
+        }
+    },
+    handler: (argv)=>{
+        console.log('Reading notes')
+        notes.readNote(argv.title)
     }
 })
 
