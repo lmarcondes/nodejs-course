@@ -7,6 +7,7 @@ const getNotes = function () {
 }
 
 const addNote = (title, body) => {
+  debugger
     var notes = loadNotes()
     // const duplicateNotes = notes.filter((note) => { return note.title === title })
     const duplicateNote = notes.find((note) => note.title === title)
