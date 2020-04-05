@@ -10,19 +10,15 @@ const forecast = require('./utils/forecast.js')
 //   console.log(response)
 // })
 
-const forecast_place = (address) => {
+const forecast_place = (address, callback) => {
   if (address) {
-    geocode(address, (error, geocodeData) =>{
+    geocode(address, (error, geocodeData) => {
       if (error) {
         console.log(error)
       } else {
         console.log(geocodeData.location)
         forecast(geocodeData.latitude, geocodeData.longitude, (error, forecasData) => {
-          if (error) {
-            console.log(error)
-          } else {
-            console.log(forecasData)
-          }
+          callback(error, forecasData)
         })
       }
     })
@@ -31,10 +27,10 @@ const forecast_place = (address) => {
   }
 }
 
-const args = {
-  run: process.argv[0],
-  file : process.argv[1],
-  command : process.argv[2]
-}
+// const args = {
+//   run: process.argv[0],
+//   file : process.argv[1],
+//   command : process.argv[2]
+// }
 
-forecast_place(args.command)
+module.exports = forecast_place

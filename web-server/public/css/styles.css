@@ -1,0 +1,28 @@
+body {
+  font-family:"Hack";
+  font-style: normal;
+  background-color:lightsalmon;
+}
+
+h1 {
+  color:black;
+  font: variant 2;
+  /* vertical-align:middle; */
+  text-justify: inter-word;
+  text-align: center;
+  align-self:auto;
+  background-color:lightgray;
+  margin:1em;
+  padding:1em;
+  border-radius: 25px;
+}
+
+img {
+  border-radius: 10%;
+}
+
+.block {
+  display: inline-flex;
+  align-items:normal;
+
+}

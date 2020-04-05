@@ -21,7 +21,12 @@ const forecast = (latitude, longitude, callback) => {
       const currentForecast = response.body.currently
       const dailyForecast = response.body.daily
       const returnString = `${dailyForecast.summary} It's currently ${currentForecast.temperature} degrees out. There is a ${currentForecast.precipProbability * 100}% chance of rain`
-      callback(error, returnString)
+      const forecasData = {
+        currentForecast,
+        dailyForecast,
+        returnString
+      }
+      callback(error, forecasData)
     }
   })
 }
