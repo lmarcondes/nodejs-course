@@ -1,13 +1,13 @@
 {
-  "name": "web-server",
+  "name": "elem-weather-forecast-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"node src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lucas Marcondes",
   "license": "ISC",
   "dependencies": {
     "csslint": "^1.0.5",
