@@ -1,28 +1,55 @@
 body {
-  font-family:"Hack";
-  font-style: normal;
-  background-color:lightsalmon;
+  color: #333333;
+  font-family: "IBM Plex Sans";
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+footer {
+  color: #888888;
+  border-top: 1px solid #eeeeee;
+  margin-top: 16px;
+  padding: 16px 0;
+}
+
+header {
+  margin-top: 16px;
+  margin-bottom: 48px;
 }
 
 h1 {
-  color:black;
-  font: variant 2;
-  /* vertical-align:middle; */
-  text-justify: inter-word;
-  text-align: center;
-  align-self:auto;
-  background-color:lightgray;
-  margin:1em;
-  padding:1em;
-  border-radius: 25px;
+  font-size: 64px;
+  margin-bottom:  16px;
 }
 
-img {
-  border-radius: 10%;
+header a {
+  color: #888888;
+  margin-right: 16px;
+  text-decoration: none;
 }
 
-.block {
-  display: inline-flex;
-  align-items:normal;
+.portrait {
+  width: 250;
+  border-radius: 10px;
+}
 
+input {
+  border: 1px solid #cccccc;
+  padding: 8px;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid #888888;
+  background: #888888;
+  color: white;
+  padding: 8px;
 }

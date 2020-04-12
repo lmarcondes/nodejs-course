@@ -2,6 +2,10 @@
 The-Complete*
 PDF*
 
+# linter configs
+.*rc
+.*
+
 # Logs
 logs
 *.log
