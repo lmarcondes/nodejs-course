@@ -5,50 +5,54 @@ const jwt = require('jsonwebtoken')
 const Task = require('./task');
 
 const userSchema = new mongoose.Schema({
-  name:{
-    type:String,
-    required:true,
-    trim:true
+  name: {
+    type: String,
+    required: true,
+    trim: true
   },
   email: {
-    type:String,
-    required:true,
-    trim:true,
-    lowercase:true,
-    unique:true,
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+    unique: true,
     validate(value) {
-      if (! validator.isEmail(value)) {
+      if (!validator.isEmail(value)) {
         throw new Error('Email provided is invalid')
       }
     }
   },
   password: {
-    type:String,
-    required:true,
-    minlength:7,
+    type: String,
+    required: true,
+    minlength: 7,
     validate(value) {
-      if (value.toLowerCase().includes('password')) { 
+      if (value.toLowerCase().includes('password')) {
         throw new Error('Password cannot contain "password"')
       }
     }
   },
   age: {
-    type:Number,
-    default:0,
+    type: Number,
+    default: 0,
     validate(value) {
       if (value < 0) {
         throw new Error('Age cannot be negative')
       }
     }
   },
-  tokens:[{
-    token:{
-      type:String,
-      required:true
+  tokens: [{
+    token: {
+      type: String,
+      required: true
     }
-  }]
+  }],
+  avatar: {
+    type: Buffer,
+    required: false
+  }
 }, {
-  timestamps:true
+  timestamps: true
 })
 
 // create a virtual relationship between users and tasks
@@ -61,7 +65,7 @@ userSchema.virtual('tasks', {
 // hash the user password before saving
 userSchema.pre('save', async function (next) {
   const user = this
-  if (user.isModified('password')){
+  if (user.isModified('password')) {
     user.password = await bcrypt.hash(user.password, 8)
   }
   next()
@@ -89,18 +93,19 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this
-  const token = jwt.sign({ _id:user.id.toString() }, 'thisisspartaleonidas')
+  const token = jwt.sign({_id: user.id.toString()}, 'thisisspartaleonidas')
   user.tokens = user.tokens.concat({token})
   await user.save()
   return token
 }
 
-userSchema.methods.toJSON = function() {
-  const user =this
+userSchema.methods.toJSON = function () {
+  const user = this
   const userObject = user.toObject()
 
   delete userObject.password
   delete userObject.tokens
+  delete userObject.avatar
 
   return userObject
 }
