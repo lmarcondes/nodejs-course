@@ -1,2 +1,4 @@
-sendgrid.env
-node_modules
+config/
+node_modules/
+.eslintrc*
+playground/
